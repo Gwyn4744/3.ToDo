@@ -1,9 +1,15 @@
-<h1>Rejestracja</h1>
+{% extends 'todo/base.html' %}
 
-{{ error }}
+{% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zarejestruj się</button>
-</form>
+    <h1>Rejestracja</h1>
+
+    {{ error }}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zarejestruj się</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+
+{% if user.is_authenticated %}
+Zalogowano jako - {{ user.username }}
+<h2>Logout</h2>
+{% else %}
+
+{% endif %}
+
+{% block content %}{% endblock %}
