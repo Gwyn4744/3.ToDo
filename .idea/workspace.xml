@@ -20,11 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b47d3464-c294-4b9f-bf85-3beae7e03039" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/signupuser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todowoo-project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/signupuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/signupuser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todowoo-project/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/todo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todowoo-project/todowoo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/todowoo/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
