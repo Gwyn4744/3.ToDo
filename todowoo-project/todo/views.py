@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
+from .forms import TodoForm
 
 # Create your views here.
 
@@ -63,3 +64,23 @@ def logoutuser(request):
 
 def home(request):
     return render(request, 'todo/home.html')
+
+def createtodos(request):
+    if request.method == 'GET':
+        contex = {
+            'form': TodoForm,
+        }
+        return render(request, 'todo/createtodo.html', contex)
+    else:
+        try:
+            form = TodoForm(request.POST)
+            newtodo = form.save(commit=False)
+            newtodo.user = request.user
+            newtodo.save()
+            return redirect('currenttodos')
+        except ValueError:
+            contex = {
+                'form': TodoForm,
+                'error': 'Nieodpowiednie dane',
+            }
+            return render(request, 'todo/createtodo.html', contex)
