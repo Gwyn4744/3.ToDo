@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import TodoForm
 from .models import Todo
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -38,6 +39,7 @@ def signupuser(request):
             }
             return render(request, 'todo/signupuser.html', contex)
 
+@login_required
 def currenttodos(request):
     todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True)
     contex = {
@@ -63,6 +65,7 @@ def loginuser(request):
             login(request, user)
             return redirect('currenttodos')
 
+@login_required
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
@@ -71,6 +74,7 @@ def logoutuser(request):
 def home(request):
     return render(request, 'todo/home.html')
 
+@login_required
 def createtodos(request):
     if request.method == 'GET':
         context = {
@@ -91,13 +95,16 @@ def createtodos(request):
             }
             return render(request, 'todo/createtodo.html', context)
 
+@login_required
 def viewtodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'GET':
         form = TodoForm(instance=todo)
+        tododone = todo.datecompleted
         context = {
             'todo': todo,
             'form': form,
+            'tododone': tododone,
         }
         return render(request, 'todo/viewtodo.html', context)
     else:
@@ -113,6 +120,7 @@ def viewtodo(request, todo_pk):
             }
             return render(request, 'todo/viewtodo.html', context)
 
+@login_required
 def completetodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'POST':
@@ -120,8 +128,24 @@ def completetodo(request, todo_pk):
         todo.save()
         return redirect('currenttodos')
 
+@login_required
 def deletetodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'POST':
         todo.delete()
         return redirect('currenttodos')
+
+@login_required
+def completedtodos(request):
+    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+    contex = {
+        'todos': todos,
+    }
+    return render(request, 'todo/completedtodos.html', contex)
+
+def returntodo(request, todo_pk):
+    todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    if request.method == 'POST':
+        todo.datecompleted = None
+        todo.save()
+        return redirect('completedtodos')

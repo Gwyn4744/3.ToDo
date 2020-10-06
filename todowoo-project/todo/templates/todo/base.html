@@ -5,6 +5,9 @@
         {% csrf_token %}
         <button type="submit">Wyloguj</button>
     </form>
+    <a href="{% url 'createtodos' %}">Stwórz</a>
+    <a href="{% url 'completedtodos' %}">Wykonane</a>
+    <a href="{% url 'currenttodos' %}">Do wykonania</a>
 {% else %}
     <form action="{% url 'loginuser' %}">
         {% csrf_token %}
