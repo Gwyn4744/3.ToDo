@@ -6,8 +6,14 @@
         <button type="submit">Wyloguj</button>
     </form>
 {% else %}
-    <button>Zaloguj</button>
-    <button>Zarejestruj się</button> <br>
+    <form action="{% url 'loginuser' %}">
+        {% csrf_token %}
+        <button type="submit">Logowanie</button>
+    </form>
+    <form action="{% url 'signupuser' %}">
+        {% csrf_token %}
+        <button type="submit">Zarejestruj się</button>
+    </form>
 {% endif %}
 
 {% block content %}{% endblock %}

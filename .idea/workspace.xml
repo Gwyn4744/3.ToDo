@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b47d3464-c294-4b9f-bf85-3beae7e03039" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/loginuser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todowoo-project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/todowoo-project/todo/templates/todo/base.html" afterDir="false" />

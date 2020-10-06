@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
@@ -37,6 +37,24 @@ def signupuser(request):
 
 def currenttodos(request):
     return render(request, 'todo/currenttodos.html')
+
+def loginuser(request):
+    if request.method == 'GET':
+        contex = {
+            'form': AuthenticationForm,
+        }
+        return render(request, 'todo/loginuser.html', contex)
+    else:
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            contex = {
+                'form': AuthenticationForm,
+                'error': 'Podana nazwa użytkownika lub hasło jest nieprawidłowe!',
+            }
+            return render(request, 'todo/loginuser.html', contex)
+        else:
+            login(request, user)
+            return redirect('currenttodos')
 
 def logoutuser(request):
     if request.method == 'POST':
