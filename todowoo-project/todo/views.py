@@ -143,6 +143,7 @@ def completedtodos(request):
     }
     return render(request, 'todo/completedtodos.html', contex)
 
+@login_required
 def returntodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'POST':
