@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -72,10 +72,10 @@ def home(request):
 
 def createtodos(request):
     if request.method == 'GET':
-        contex = {
+        context = {
             'form': TodoForm,
         }
-        return render(request, 'todo/createtodo.html', contex)
+        return render(request, 'todo/createtodo.html', context)
     else:
         try:
             form = TodoForm(request.POST)
@@ -84,8 +84,30 @@ def createtodos(request):
             newtodo.save()
             return redirect('currenttodos')
         except ValueError:
-            contex = {
+            context = {
                 'form': TodoForm,
                 'error': 'Nieodpowiednie dane',
             }
-            return render(request, 'todo/createtodo.html', contex)
+            return render(request, 'todo/createtodo.html', context)
+
+def viewtodo(request, todo_pk):
+    todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    if request.method == 'GET':
+        form = TodoForm(instance=todo)
+        context = {
+            'todo': todo,
+            'form': form,
+        }
+        return render(request, 'todo/viewtodo.html', context)
+    else:
+        try:
+            form = TodoForm(request.POST, instance=todo)
+            form.save()
+            return redirect('currenttodos')
+        except ValueError:
+            context = {
+                'form': todo,
+                'form': form,
+                'error': 'Nieodpowiednie dane',
+            }
+            return render(request, 'todo/viewtodo.html', context)
